@@ -1,6 +1,6 @@
 # GDG Babcock Hacktoberfest 2025 🎉
 
-Welcome to the **official Hacktoberfest 2025 repo** for [GDG on Campus Babcock](https://gdg.community.dev/)!  
+Welcome to the **official Hacktoberfest 2025 repo** for [GDG on Campus Babcock](https://gdgbabcock.com/)!  
 This repository is the central hub for all contributions and project work happening in our community this October.
 
 ---
@@ -37,7 +37,7 @@ Each repo has issues tagged with `good first issue` and `hacktoberfest` to help 
 ## 🏆 Recognition & Prizes
 - 🎓 **Certificates** for all participants.  
 - 🏅 **Leaderboard** to highlight top contributors.  
-- 🎁 **Prizes for top contributors**, including swag, books, and special recognition.  
+- 🎁 **Prizes for top contributors**, including swag and special recognition.  
 
 ---
 
@@ -52,9 +52,9 @@ Each repo has issues tagged with `good first issue` and `hacktoberfest` to help 
 ---
 
 ## 📬 Stay Connected
-- Join our [GDG Babcock community](https://gdg.community.dev/).  
-- Follow updates via our WhatsApp/Discord group (link shared with members).  
-- Reach out to mentors during sprints for help.  
+- Join our [GDG Babcock community](https://gdg.community.dev/gdg-on-campus-babcock-university-ilishan-remo-nigeria/).  
+- Follow updates via our WhatsApp group (link shared with members).  
+- Reach out to the technical leads during sprints for help.  
 
 ---
 
