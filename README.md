@@ -6,18 +6,21 @@ This repository is the central hub for all contributions and project work happen
 ---
 
 ## 🌍 About Hacktoberfest
-Hacktoberfest is a global open-source festival that runs from **October 1–31, 2025**.  
-Participants contribute to open-source repositories, learn by doing, and celebrate building with the global dev community.  
+Hacktoberfest is a global open-source festival that runs from **October 1–31, 2025**.
+Participants contribute to open-source repositories, learn by doing, and celebrate building with the global dev community.
 [Register here](https://hacktoberfest.com) to make your contributions count!
 
 ---
 
 ## 🚀 How to Participate with GDG Babcock
-1. **Register for Hacktoberfest** on the official site.  
-2. **Fill out our [Google Form](#)** so we can track your progress locally.  
-3. **Pick a repo** from our list below.  
-4. **Contribute** by working on open issues or submitting new features.  
-5. **Track your progress** on our leaderboard (to be updated weekly).  
+1. **Register for Hacktoberfest** on the official site.
+2. **Read the [Hacktoberfest Participation Guidelines](https://hacktoberfest.com/participation)** to understand what counts as a valid contribution.
+3. Not all contributions need to be code! **Check out [Non-Code Contributions in Open Source](https://github.com/readme/featured/open-source-non-code-contributions)**
+ for ideas.
+4. **Fill out our [Google Form](https://forms.gle/1YBhNGXspEzmFBxQ9)** so we can track your progress locally.
+5. **Pick a repo** from our list below.
+6. **Contribute** by working on open issues or submitting new features.
+7. **Track your progress** on our leaderboard (to be updated weekly).
 
 ---
 
@@ -25,9 +28,9 @@ Participants contribute to open-source repositories, learn by doing, and celebra
 This repo contains a brand-new project for Hacktoberfest. You can contribute directly here **or** explore the other projects below:
 
 - 🔗 [Main Project Repo (this one)](./)  
-- 🔗 [Repo 1](#)  
-- 🔗 [Repo 2](#)  
-- 🔗 [Repo 3](#)  
+- 🔗 [Repo 1](https://github.com/GDGBabcockUniversity/gdsc-wrapped-frontend)  
+- 🔗 [Repo 2](https://github.com/GDGBabcockUniversity/gdsc-wrapped-backend)  
+- 🔗 [Repo 3](https://github.com/GDGBabcockUniversity/habify)  
 - 🔗 [Repo 4](#)  
 
 Each repo has issues tagged with `good first issue` and `hacktoberfest` to help you get started.
@@ -59,4 +62,4 @@ Each repo has issues tagged with `good first issue` and `hacktoberfest` to help 
 ---
 
 Let’s make this Hacktoberfest amazing 🚀💡  
-*— GDG on Campus Babcock Team*
+*— GDG Babcock Team*
