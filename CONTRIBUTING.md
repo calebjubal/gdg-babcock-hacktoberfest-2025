@@ -1,7 +1,7 @@
 # Contributing to Hacktoberfest @ GDG Babcock 2025
 
 First off, thank you for your interest in contributing! 🎉
-This project is part of **Hacktoberfest 2025**, organized by **GDG Babcock**, to encourage open source contributions and help beginners get started with Git and GitHub.
+This project is part of **Hacktoberfest 2025**, organized by **GDG Babcock**, to encourage open source contributions and help beginners get started with Git and GitHub. Contributions aren’t limited to code. You can improve documentation, design, or even translations. Learn more from this great guide: [Open Source Non-Code Contributions](https://github.com/readme/featured/open-source-non-code-contributions).
 
 We’re excited to have you on board 🚀.
 
