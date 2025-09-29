@@ -31,9 +31,37 @@ This repo contains a brand-new project for Hacktoberfest. You can contribute dir
 - 🔗 [Repo 1](https://github.com/GDGBabcockUniversity/gdsc-wrapped-frontend)  
 - 🔗 [Repo 2](https://github.com/GDGBabcockUniversity/gdsc-wrapped-backend)  
 - 🔗 [Repo 3](https://github.com/GDGBabcockUniversity/habify)  
-- 🔗 [Repo 4](#)  
+- 🔗 [Repo 4](https://github.com/GDGBabcockUniversity/hacktoberfest-findit)  
 
 Each repo has issues tagged with `good first issue` and `hacktoberfest` to help you get started.
+
+---
+
+## 🖥️ New Project: Certificate Generator 🎓
+
+For Hacktoberfest 2025, we’re building a Certificate Generator — an app that allows event organizers to easily create and distribute certificates to participants.
+
+🔧 Tech Stack
+- Frontend: React
+- Backend: FastAPI (Python)
+- Containerization: Docker + Docker Compose
+
+🗂️ Repo Structure
+```
+hacktoberfest-2025/
+├── frontend/   # React project
+├── backend/    # FastAPI project
+```
+
+🎯 Planned Features
+
+- Upload participant list (CSV/JSON)
+- Choose from customizable certificate templates
+- Auto-generate PDF certificates
+- Send certificates via email
+- View and download certificates on-demand
+
+👉 Check the Issues tab for open tasks — from frontend UI components to backend API routes and documentation.
 
 ---
 
