@@ -65,6 +65,71 @@ hacktoberfest-2025/
 ```
 
 ---
+## 💻 Getting Started
+
+Follow these steps to set up the project locally.
+
+### Local Setup for Frontend
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and go to `http://localhost:3000` (or the port specified in the console).
+
+### Local Setup for Backend
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Create a virtual environment (recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Run the FastAPI server:
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+5. The API will be available at `http://localhost:8000`.
+
+### Docker Setup Guide
+
+1. Ensure Docker and Docker Compose are installed on your system.
+
+2. From the root directory of the project, run:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. This will build and start both the frontend and backend services in containers.
+
+4. Access the application:
+   - Frontend: `http://localhost:3000`
+   - Backend API: `http://localhost:8000`
+
+---
+
 
 ## 🎯 Planned Features
 
