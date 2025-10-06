@@ -33,10 +33,10 @@ Participants contribute to open-source repositories, learn by doing, and celebra
 This repo contains a brand-new project for Hacktoberfest. You can contribute directly here **or** explore the other projects below:
 
 - 🔗 [Main Project Repo (this one)](https://github.com/GDGBabcockUniversity/gdg-babcock-hacktoberfest-2025/tree/main)
-- 🔗 [Repo 1](https://github.com/GDGBabcockUniversity/gdsc-wrapped-frontend)
-- 🔗 [Repo 2](https://github.com/GDGBabcockUniversity/gdsc-wrapped-backend)
-- 🔗 [Repo 3](https://github.com/GDGBabcockUniversity/habify)
-- 🔗 [Repo 4](https://github.com/GDGBabcockUniversity/hacktoberfest-findit)
+- 🔗 [GDG Wrapped Frontend](https://github.com/GDGBabcockUniversity/gdsc-wrapped-frontend)
+- 🔗 [GDG Wrapped Backend](https://github.com/GDGBabcockUniversity/gdsc-wrapped-backend)
+- 🔗 [Habify](https://github.com/GDGBabcockUniversity/habify)
+- 🔗 [Find It](https://github.com/GDGBabcockUniversity/hacktoberfest-findit)
 
 Each repo has issues tagged with `good first issue` and `hacktoberfest` to help you get started.
 
