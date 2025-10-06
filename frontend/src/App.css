@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  padding-top: 4.5rem; /* space for navbar */
+  padding-bottom: 3.5rem; /* space for footer */
 }
 
 .logo {
