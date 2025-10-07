@@ -1,10 +1,10 @@
 import React from 'react';
-import './Footer.css';
+import './Navbar.css';
 
-const Footer = () => (
-  <footer className="footer">
-    <span>GDG Babcock &mdash; Hacktoberfest 2025</span>
-  </footer>
+const Navbar = () => (
+  <nav className="navbar">
+    <span className="navbar__brand">GDG Babcock Hacktoberfest</span>
+  </nav>
 );
 
-export default Footer;
+export default Navbar;
