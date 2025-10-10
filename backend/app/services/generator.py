@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
-from backend.app.models.certificates import CertificateBase
+from ..models.certificates import CertificateBase
 
 def generate_certificate_from_model(cert_data: CertificateBase, output_path="certificate.png"):
     # Now you can access cert_data.name, cert_data.event, cert_data.date

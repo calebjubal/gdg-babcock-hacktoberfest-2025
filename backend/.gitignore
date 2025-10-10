@@ -1,85 +1,62 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
+
+# Ignore Python virtual environments
+venv/
+env/
+.venv/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# Ignore Python cache and build artifacts
+__pycache__/*
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
 *.egg-info/
-.installed.cfg
-*.egg
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
+dist/
+build/
+.eggs/
+.mypy_cache/
+.pytest_cache/
 .tox/
 .nox/
 .coverage
 .coverage.*
 .cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+htmlcov/
+.pdm.toml
+.pdm.lock
+pip-log.txt
+pip-delete-this-directory.txt
+.ipynb_checkpoints/
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# Ignore IDE/editor/project files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
 
-# pyenv
+# Ignore logs and local settings
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore test and coverage outputs
+site/
+target/
+celerybeat-schedule
+celerybeat.pid
+cython_debug/
+.pyre/
+.pytype/
+.dmypy.json
+dmypy.json
 .python-version
 
-# mypy
-.mypy_cache/
-.dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# VS Code
-.vscode/
-
-# Python virtual environments
-venv/
-.venv/
+# Do not ignore any source code or config files
 env/
-ENV/
-env.bak/
-venv.bak/
-
-# Environment variables
-.env
-.env.*
-
-# SQLite and other DBs
-*.db
-*.sqlite3
-
-# Docker
-*.pid
-
-# Logs
-*.log
-
-# MacOS
-.DS_Store
-
-# Windows
-Thumbs.db
