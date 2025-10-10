@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import NotFound from './NotFound.jsx';
+import CertificateForm from './pages/CertificateForm.jsx';
 
 function Home() {
   const [count, setCount] = useState(0);
@@ -27,11 +28,13 @@ function Home() {
   );
 }
 
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/certificate" element={<CertificateForm />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
