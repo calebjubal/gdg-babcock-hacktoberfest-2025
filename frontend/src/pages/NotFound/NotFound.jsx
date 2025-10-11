@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './NotFound.css';
+import '../../App.css';
 
 const NotFound = () => (
   <section className="not-found">

@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/certificate" element={<CertificateForm />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound   />} />
       </Routes>
     </BrowserRouter>
   );
