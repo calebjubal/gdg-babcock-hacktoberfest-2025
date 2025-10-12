@@ -4,7 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
-import CertificateForm from './pages/CertificateForm.jsx';
+import CertificateForm from './pages/CertificationForm/CertificateForm.jsx';
 
 function Home() {
   const [count, setCount] = useState(0);
