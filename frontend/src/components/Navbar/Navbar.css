@@ -1,0 +1,17 @@
+.navbar {
+  background: #222;
+  color: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.navbar__brand {
+  letter-spacing: 1px;
+}

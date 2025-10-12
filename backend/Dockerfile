@@ -1,27 +1,19 @@
-# Use the official lightweight Python image
-FROM python:3.11-slim
+# Stage 1: Build React app
+FROM node:22-alpine AS build
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Set working directory
 WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy project files
+COPY package.json package-lock.json ./
+RUN npm install
 COPY . .
+RUN npm run build
 
-# Expose the FastAPI port
-EXPOSE 8000
+# Stage 2: Serve app with nginx
+FROM nginx:alpine
 
-# Run the FastAPI app with uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Copy build output to nginx html folder
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose nginx port
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,10 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
-from ..models.certificates import CertificateBase
-
-def generate_certificate_from_model(cert_data: CertificateBase, output_path="certificate.png"):
-    # Now you can access cert_data.name, cert_data.event, cert_data.date
-    return generate_certificate(cert_data.participant_name, cert_data.event_name, cert_data.date_issued, output_path)
 
 def generate_certificate(name, event, date, output_path="certificate.png"):
     # Debug: show where it will save
@@ -102,11 +97,5 @@ def generate_certificate(name, event, date, output_path="certificate.png"):
     return output_path
 
 if __name__ == "__main__":
-    data = CertificateBase(
-        participant_name="Jane Doe",
-        event_name="Hacktoberfest 2025",
-        date_issued="2025-10-03"
-    )
-
-    file_path = generate_certificate_from_model(data)
+    file_path = generate_certificate("Jane Doe", "Hacktoberfest 2025", "2025-10-03")
     print("✅ Certificate generated at:", file_path)
