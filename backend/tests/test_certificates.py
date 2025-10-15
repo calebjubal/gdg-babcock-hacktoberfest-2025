@@ -3,6 +3,7 @@ import httpx
 from httpx import ASGITransport
 import sys
 import os
+import uuid
 
 # add the full project path to Python path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -129,3 +130,87 @@ async def test_async_setup():
 
 async def simple_async_function():
     return "hello"
+
+
+class TestGetCertificateEndpoints:
+    """
+    Automated tests for GET /certificates/{unique_id}
+    """
+
+    @pytest.mark.asyncio
+    async def test_get_certificate_success(self):
+        """
+        Test successful retrieval of a certificate PNG file
+        """
+        async with httpx.AsyncClient(
+            transport=ASGITransport(app=app),
+            base_url="http://test"
+        ) as client:
+            # Create certificate first
+            data = {
+                "participant_name": "Lionel Messi",
+                "event_name": "GDG Babcock Hacktoberfest 2025",
+                "date_issued": "2025-10-08"
+            }
+
+            post_response = await client.post("/certificates/", json=data)
+            assert post_response.status_code == 200, "Certificate creation failed"
+            post_json = post_response.json()
+            unique_id = post_json["unique_id"]
+            filename = post_json["filename"]
+
+            # GET certificate using the unique_id
+            get_response = await client.get(f"/certificates/{unique_id}")
+
+            # verify response
+            assert get_response.status_code == 200
+            assert get_response.headers["content-type"] == "image/png"
+
+            # verify file bytes (PNG)
+            content = get_response.content
+            assert content[:8] == b'\x89PNG\r\n\x1a\n', "Not a valid PNG file"
+
+    @pytest.mark.asyncio
+    async def test_get_certificate_not_found(self):
+        """
+        Test 404 when unique_id does not exist
+        """
+        async with httpx.AsyncClient(
+            transport=ASGITransport(app=app),
+            base_url="http://test"
+        ) as client:
+            random_id = str(uuid.uuid4())
+            response = await client.get(f"/certificates/{random_id}")
+
+            assert response.status_code == 404, f"Expected 404, got {response.status_code}"
+
+    @pytest.mark.asyncio
+    async def test_get_certificate_file_missing(self):
+        """
+        Test 404 when certificate metadata exists but file is missing
+        """
+        async with httpx.AsyncClient(
+            transport=ASGITransport(app=app),
+            base_url="http://test"
+        ) as client:
+            # create certificate
+            data = {
+                "participant_name": "Lionel Messi",
+                "event_name": "GDG Babcock Hacktoberfest 2025",
+                "date_issued": "2025-10-08"
+            }
+            post_response = await client.post("/certificates/", json=data)
+            assert post_response.status_code == 200
+            post_json = post_response.json()
+            unique_id = post_json["unique_id"]
+            filename = post_json["filename"]
+
+            # delete file manually (simulate missing file)
+            certificates_dir = os.path.join(project_root, "certificates")
+            file_path = os.path.join(certificates_dir, filename)
+            if os.path.exists(file_path):
+                os.remove(file_path)
+
+            # attempt to GET certificate again
+            get_response = await client.get(f"/certificates/{unique_id}")
+            assert get_response.status_code == 404, f"Expected 404 for missing file, got {get_response.status_code}"
