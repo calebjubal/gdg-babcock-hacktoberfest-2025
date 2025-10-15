@@ -1,19 +1,28 @@
-# Stage 1: Build React app
-FROM node:22-alpine AS build
+# Use Python 3.11 slim image as base
+FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
+
+# Install system dependencies if needed
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
 COPY . .
-RUN npm run build
 
-# Stage 2: Serve app with nginx
-FROM nginx:alpine
+# Create certificates directory if it doesn't exist
+RUN mkdir -p /app/certificates
 
-# Copy build output to nginx html folder
-COPY --from=build /app/dist /usr/share/nginx/html
+# Expose port 8000 for FastAPI
+EXPOSE 8000
 
-# Expose nginx port
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Command to run the application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
