@@ -65,6 +65,15 @@ hacktoberfest-2025/
 ```
 
 ---
+
+### ✅ Backend Structure Verification (Issue #XX)
+
+- Verified that all backend-related files are properly organized inside the `backend/` directory.
+- No misplaced backend logic or configuration files were found outside the folder.
+- The `docker-compose.yml` file correctly remains in the project root because it orchestrates both `frontend` and `backend` services.
+- This ensures proper separation of concerns and clean project structure.
+
+
 ## 💻 Getting Started
 
 Follow these steps to set up the project locally.
