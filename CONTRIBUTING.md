@@ -9,7 +9,7 @@ We’re excited to have you on board 🚀.
 
 ## 📋 Table of Contents
 
-- [Project Setup](#project-setup)
+- [Project Setup](#%EF%B8%8F-project-setup)
   - [Prerequisites](#prerequisites)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
@@ -18,7 +18,7 @@ We’re excited to have you on board 🚀.
 - [Branch and PR Flow](#-branch-and-pr-flow)
 - [Commit Message Style](#-commit-message-style)
 - [Contribution Guidelines](#-contribution-guidelines)
-- [What You Can Contribute](#what-you-can-contribute)
+- [What You Can Contribute](#%EF%B8%8F-what-you-can-contribute)
 - [Code of Conduct](#-code-of-conduct)
 
 ---
