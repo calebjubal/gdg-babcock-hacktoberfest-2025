@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './CertificateForm.css';
@@ -17,6 +18,8 @@ const CertificateForm = () => {
   const [imageLoading, setImageLoading] = useState(false);
   const [imageError, setImageError] = useState(null);
 
+  const API_BASE_URL = 'http://localhost:8000';
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -28,26 +31,24 @@ const CertificateForm = () => {
     setError(null);
     setCertificateUrl(null);
     setImageError(null);
+
     try {
-      const res = await fetch('http://localhost:8000/certificates/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          participant_name: form.participant_name,
-          event_name: form.event_name,
-          date_issued: form.date_issued,
-        }),
+      // POST request to create certificate
+      const res = await axios.post(`${API_BASE_URL}/certificates/`, {
+        participant_name: form.participant_name,
+        event_name: form.event_name,
+        date_issued: form.date_issued,
       });
-      if (!res.ok) throw new Error('Failed to create certificate');
-      const data = await res.json();
-      setSuccess(data);
+
+      setSuccess(res.data);
       setForm({ participant_name: '', event_name: '', role: '', date_issued: '' });
-      if (data.download_url) {
+
+      // Fetch certificate image if URL is provided
+      if (res.data.download_url) {
         setImageLoading(true);
-        const url = 'http://localhost:8000' + data.download_url;
+        const url = `${API_BASE_URL}${res.data.download_url}`;
         try {
-          const imgRes = await fetch(url);
-          if (!imgRes.ok) throw new Error('Certificate image not found');
+          await axios.get(url);
           setCertificateUrl(url);
         } catch (imgErr) {
           setImageError('Could not load certificate image.');
@@ -56,7 +57,7 @@ const CertificateForm = () => {
         }
       }
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || err.message || 'An error occurred');
     } finally {
       setLoading(false);
     }
