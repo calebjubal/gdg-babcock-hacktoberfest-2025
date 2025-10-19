@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
@@ -31,13 +31,13 @@ function Home() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/certificate" element={<CertificateForm />} />
         <Route path="*" element={<NotFound   />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
