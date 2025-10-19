@@ -1,19 +1,15 @@
 # Contributing to Hacktoberfest @ GDG Babcock 2025
 
 First off, thank you for your interest in contributing! 🎉
-This project is part o---
+This project is part of **Hacktoberfest 2025**, organized by **GDG Babcock**, to encourage open source contributions and help beginners get started with Git and GitHub. Contributions aren’t limited to code. You can improve documentation, design, or even translations. Learn more from this great guide: [Open Source Non-Code Contributions](https://github.com/readme/featured/open-source-non-code-contributions).
 
-## 📌 How to Contribute
-
-1. **Fork the repository**est 2025**, organized by **GDG Babcock**, to encourage open source contributions and help beginners get started with Git and GitHub. Contributions aren't limited to code. You can improve documentation, design, or even translations. Learn more from this great guide: [Open Source Non-Code Contributions](https://github.com/readme/featured/open-source-non-code-contributions).
-
-We're excited to have you on board 🚀.
+We’re excited to have you on board 🚀.
 
 ---
 
 ## 📋 Table of Contents
 
-- [Project Setup](#-project-setup)
+- [Project Setup](#project-setup)
   - [Prerequisites](#prerequisites)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
@@ -22,7 +18,7 @@ We're excited to have you on board 🚀.
 - [Branch and PR Flow](#-branch-and-pr-flow)
 - [Commit Message Style](#-commit-message-style)
 - [Contribution Guidelines](#-contribution-guidelines)
-- [What You Can Contribute](#-what-you-can-contribute)
+- [What You Can Contribute](#what-you-can-contribute)
 - [Code of Conduct](#-code-of-conduct)
 
 ---
@@ -137,15 +133,6 @@ If you prefer to use Docker for easier setup:
    ```bash
    docker-compose down
    ```
-
----
-
-## 📌 How to Contributing to Hacktoberfest @ GDG Babcock 2025
-
-First off, thank you for your interest in contributing! 🎉
-This project is part of **Hacktoberfest 2025**, organized by **GDG Babcock**, to encourage open source contributions and help beginners get started with Git and GitHub. Contributions aren’t limited to code. You can improve documentation, design, or even translations. Learn more from this great guide: [Open Source Non-Code Contributions](https://github.com/readme/featured/open-source-non-code-contributions).
-
-We’re excited to have you on board 🚀.
 
 ---
 
