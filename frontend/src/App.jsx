@@ -9,9 +9,9 @@ import Home from './pages/Home/Home.jsx';
 function App() {
   return (
     <Router>
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div className="app-container">
         <Navbar />
-        <main style={{ flex: 1 }}>
+        <main className="app-main">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/certificate" element={<CertificateForm />} />
