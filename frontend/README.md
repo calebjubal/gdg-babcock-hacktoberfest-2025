@@ -88,8 +88,7 @@ frontend/
 ├── public/
 │   └── gdg-favicon.svg          # GDG favicon
 ├── src/
-│   ├── assets/
-│   │   └── react.svg            # React logo
+│   ├── assets/                  # Asset files (currently empty)
 │   ├── components/
 │   │   ├── Footer/              # Footer component
 │   │   │   ├── Footer.css
