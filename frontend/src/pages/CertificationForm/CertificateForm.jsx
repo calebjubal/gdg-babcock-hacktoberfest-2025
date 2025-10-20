@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './CertificateForm.css';
+import { toast } from 'react-hot-toast';
 
 const CertificateForm = () => {
   const [form, setForm] = useState({
@@ -10,8 +11,6 @@ const CertificateForm = () => {
     date_issued: '',
   });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null);
   const [certificateUrl, setCertificateUrl] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [imageError, setImageError] = useState(null);
@@ -25,10 +24,9 @@ const CertificateForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess(null);
-    setError(null);
     setCertificateUrl(null);
     setImageError(null);
+  const toastId = toast.loading('Generating certificate...');
 
     try {
       const res = await axios.post(`${API_BASE_URL}/certificates/`, {
@@ -37,7 +35,6 @@ const CertificateForm = () => {
         date_issued: form.date_issued,
       });
 
-      setSuccess(res.data);
       setForm({ participant_name: '', event_name: '', role: '', date_issued: '' });
 
       if (res.data.download_url) {
@@ -48,12 +45,15 @@ const CertificateForm = () => {
           setCertificateUrl(url);
         } catch (imgErr) {
           setImageError('Could not load certificate image.');
+          toast.error('Could not load certificate image.');
         } finally {
           setImageLoading(false);
         }
       }
+      toast.success('Certificate generated successfully!', { id: toastId });
     } catch (err) {
-      setError(err.response?.data?.message || err.message || 'An error occurred');
+      const message = err.response?.data?.message || err.message || 'An error occurred, please try again.';
+      toast.error(message, { id: toastId });
     } finally {
       setLoading(false);
     }
@@ -112,8 +112,6 @@ const CertificateForm = () => {
         <button type="submit" disabled={loading}>
           {loading ? 'Generating...' : 'Generate'}
         </button>
-        {success && <div className="cert-success">Certificate generated!</div>}
-        {error && <div className="cert-error">{error}</div>}
       </form>
 
       {certificateUrl && (
