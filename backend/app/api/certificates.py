@@ -28,7 +28,8 @@ async def create_certificate(cert: CertificateCreate):
         cert_obj = Certificate(
             participant_name=cert.participant_name,
             event_name=cert.event_name,
-            date_issued=cert.date_issued
+            date_issued=cert.date_issued,
+            certificate_type=cert.certificate_type
         )
 
         output_dir = "certificates"
@@ -64,6 +65,7 @@ async def create_certificate(cert: CertificateCreate):
             participant_name=cert_obj.participant_name,
             event_name=cert_obj.event_name,
             date_issued=cert_obj.date_issued,
+            certificate_type=cert_obj.certificate_type,
             unique_id=cert_obj.unique_id,
             filename=cert_obj.filename,
             download_url=f"/certificates/{cert_obj.unique_id}",
@@ -76,6 +78,69 @@ async def create_certificate(cert: CertificateCreate):
         logger.error(f"Unhandled error in POST /certificates: {e}")
         raise HTTPException(status_code=500, detail="Internal server error while creating certificate.")
 
+@router.post("/completion", response_model=CertificateResponse)
+async def create_comp_certificate(cert: CertificateCreate):
+    try:
+        # Input validation
+        if not cert.participant_name.strip() or not cert.event_name.strip():
+            raise HTTPException(
+                status_code=400,
+                detail="Participant name and event name cannot be empty."
+            )
+
+        # Create certificate object
+        cert_obj = Certificate(
+            participant_name=cert.participant_name,
+            event_name=cert.event_name,
+            date_issued=cert.date_issued,
+            certificate_type=cert.certificate_type
+        )
+
+        output_dir = "certificates"
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, cert_obj.filename)
+
+        # Attempt generation
+        try:
+            generate_certificate(
+                cert_obj.participant_name,
+                cert_obj.event_name,
+                cert_obj.date_issued,
+                output_path
+            )
+        except FileNotFoundError as e:
+            logger.error(f"Template file missing: {e}")
+            raise HTTPException(status_code=500, detail="Certificate template not found on server.")
+        except PermissionError as e:
+            logger.error(f"Permission error writing file: {e}")
+            raise HTTPException(status_code=500, detail="Server permission error while saving certificate.")
+        except Exception as e:
+            logger.error(f"Unexpected error during certificate generation: {e}")
+            raise HTTPException(status_code=500, detail="Unexpected error during certificate generation.")
+
+        # Save in-memory record
+        certificates[cert_obj.unique_id] = {
+            "data": cert_obj.to_dict(),
+            "file": output_path
+        }
+
+        # Successful response
+        return CertificateResponse(
+            participant_name=cert_obj.participant_name,
+            event_name=cert_obj.event_name,
+            date_issued=cert_obj.date_issued,
+            certificate_type=cert_obj.certificate_type,
+            unique_id=cert_obj.unique_id,
+            filename=cert_obj.filename,
+            download_url=f"/certificates/{cert_obj.unique_id}",
+            created_at=cert_obj.created_at
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Unhandled error in POST /certificates: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error while creating certificate.")
 
 @router.get("/{unique_id}")
 async def get_certificate(unique_id: str):
