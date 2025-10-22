@@ -4,7 +4,7 @@ Pydantic schemas and ORM models for certificate generation
 """
 
 from pydantic import BaseModel, Field, validator
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from uuid import uuid4
 import re
@@ -54,7 +54,7 @@ class CertificateBase(BaseModel):
         if not v.strip():
             raise ValueError('Event name cannot be empty')
         return v.strip()
-    
+
     @validator('date_issued')
     def validate_date_format(cls, v):
         """Validate date format"""
@@ -112,42 +112,41 @@ class CertificateResponse(CertificateBase):
         }
 
 
-class BulkCertificateRequest(BaseModel):
-    """Schema for bulk certificate generation"""
-    participants: list[CertificateCreate] = Field(
-        ...,
-        min_length=1,
-        max_length=100,
-        description="List of participants (max 100 per request)"
-    )
+class BulkCertificateItem(BaseModel):
+    """Individual certificate item for bulk generation"""
+    participant_name: str = Field(..., description="Participant's full name")
+    email: Optional[str] = Field(None, description="Participant's email address")
     
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "participants": [
-                    {
-                        "participant_name": "Alice Johnson",
-                        "event_name": "GDG Babcock Hacktoberfest 2025",
-                        "date_issued": "2025-10-04"
-                    },
-                    {
-                        "participant_name": "Bob Smith",
-                        "event_name": "GDG Babcock Hacktoberfest 2025",
-                        "date_issued": "2025-10-04"
-                    }
-                ]
-            }
-        }
+    @validator('participant_name')
+    def validate_participant_name(cls, v):
+        if not v.strip():
+            raise ValueError('Participant name cannot be empty')
+        if not re.match(r"^[a-zA-Z\s\-'\.]+$", v):
+            raise ValueError('Participant name contains invalid characters')
+        return v.strip()
+
+
+class BulkCertificateRequest(BaseModel):
+    """Request model for bulk certificate generation"""
+    event_name: str = Field(..., min_length=3, max_length=200)
+    date_issued: str = Field(..., description="Date in YYYY-MM-DD format")
+    participants: List[BulkCertificateItem] = Field(..., min_items=1, max_items=100)
+    
+    @validator('event_name')
+    def validate_event_name(cls, v):
+        if not v.strip():
+            raise ValueError('Event name cannot be empty')
+        return v.strip()
 
 
 class BulkCertificateResponse(BaseModel):
-    """Schema for bulk certificate generation response"""
-    message: str
-    total_requested: int
-    successful: int
-    failed: int
-    results: list[CertificateResponse]
-    errors: Optional[list[dict]] = None
+    """Response model for bulk certificate generation"""
+    success_count: int
+    failed_count: int
+    total_count: int
+    successful_certificates: List[dict]
+    failed_certificates: List[dict]
+    download_url: Optional[str] = None
 
 
 class CertificateListResponse(BaseModel):
