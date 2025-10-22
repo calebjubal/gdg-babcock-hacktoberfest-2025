@@ -31,7 +31,13 @@ class CertificateBase(BaseModel):
         ...,
         description="Date when certificate was issued (YYYY-MM-DD format)"
     )
-    
+    certificate_type: str = Field(
+        ...,
+        min_length=3,
+        max_length=20,
+        description="Type of certificate (e.g., participation, completion)"
+    )
+
     @validator('participant_name')
     def validate_participant_name(cls, v):
         """Validate participant name"""
@@ -57,6 +63,14 @@ class CertificateBase(BaseModel):
             return v
         except ValueError:
             raise ValueError('Date must be in YYYY-MM-DD format')
+    
+    @validator('certificate_type')
+    def validate_certificate_type(cls, v):
+        """Validate certificate type"""
+        allowed_types = {'participation', 'completion'}
+        if v.lower() not in allowed_types:
+            raise ValueError(f'Certificate type must be one of {allowed_types}')
+        return v.lower()
 
 
 class CertificateCreate(CertificateBase):
@@ -89,6 +103,7 @@ class CertificateResponse(CertificateBase):
                 "participant_name": "John Doe",
                 "event_name": "GDG Babcock Hacktoberfest 2025",
                 "date_issued": "2025-10-04",
+                "certificate_type": "completion",
                 "unique_id": "cert_1a2b3c4d5e6f",
                 "filename": "John_Doe_GDG_Babcock_Hacktoberfest_2025_2025-10-04.png",
                 "download_url": "/download-certificate/John_Doe_GDG_Babcock_Hacktoberfest_2025_2025-10-04.png",
@@ -163,11 +178,13 @@ class Certificate:
         participant_name: str,
         event_name: str,
         date_issued: str,
+        certificate_type: str,
         unique_id: Optional[str] = None
     ):
         self.participant_name = participant_name
         self.event_name = event_name
         self.date_issued = date_issued
+        self.certificate_type = certificate_type
         self.unique_id = unique_id or self._generate_unique_id()
         self.filename = self._generate_filename()
         self.created_at = datetime.now()
