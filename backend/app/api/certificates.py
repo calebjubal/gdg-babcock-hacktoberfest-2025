@@ -25,8 +25,55 @@ router = APIRouter()
 certificates = {}
 
 
-@router.post("/", response_model=CertificateResponse)
+@router.post(
+    "/",
+    response_model=CertificateResponse,
+    responses={
+        200: {"description": "Certificate created successfully"},
+        400: {"description": "Invalid input (empty participant or event name)"},
+        422: {"description": "Request validation error"},
+        500: {"description": "Internal server error during certificate generation"},
+    },
+)
 async def create_certificate(cert: CertificateCreate):
+    """
+    Create a new digital certificate for a participant.
+
+    This endpoint generates a certificate image file based on the participant’s details
+    and stores its record temporarily in memory (use a persistent DB in production).
+
+    ---
+    **Request Body Example**
+    ```json
+    {
+        "participant_name": "Jane Doe",
+        "event_name": "AI Hackathon 2025",
+        "date_issued": "2025-10-21"
+    }
+    ```
+
+    **Successful Response (200)**
+    ```json
+    {
+        "participant_name": "Jane Doe",
+        "event_name": "AI Hackathon 2025",
+        "date_issued": "2025-10-21",
+        "unique_id": "c8b5a120-6d48-4d13-9af5-2c7ad70fef14",
+        "filename": "Jane_Doe_AI_Hackathon_2025.png",
+        "download_url": "/certificates/c8b5a120-6d48-4d13-9af5-2c7ad70fef14",
+        "created_at": "2025-10-21T15:30:12.004Z"
+    }
+    ```
+
+    **Error Codes**
+    - `400`: Invalid input (empty participant or event name)
+    - `422`: Request validation error (invalid format)
+    - `500`: Internal server error (template missing, permission denied, etc.)
+
+    **Notes**
+    - Certificate images are saved in the `certificates/` directory.
+    - The returned `unique_id` can be used to download the generated certificate later.
+    """
     try:
         # Input validation
         if not cert.participant_name.strip() or not cert.event_name.strip():
@@ -88,8 +135,41 @@ async def create_certificate(cert: CertificateCreate):
         raise HTTPException(status_code=500, detail="Internal server error while creating certificate.")
 
 
-@router.get("/{unique_id}")
+@router.get(
+    "/{unique_id}",
+    responses={
+        200: {"description": "Returns the certificate image file"},
+        404: {"description": "Certificate record or file not found"},
+        500: {"description": "Internal server error while fetching certificate"},
+    },
+)
 async def get_certificate(unique_id: str):
+    """
+    Retrieve a generated certificate by its unique ID.
+
+    This endpoint returns the generated certificate image file if it exists on the server.
+    The certificate must first be created using the `POST /certificates` endpoint.
+
+    ---
+    **Path Parameter**
+    - `unique_id` (string): Unique identifier of the certificate.
+
+    **Example Request**
+    ```
+    GET /certificates/c8b5a120-6d48-4d13-9af5-2c7ad70fef14
+    ```
+
+    **Example Response (File Download)**
+    - Content-Type: `image/png`
+    - File: `Jane_Doe_AI_Hackathon_2025.png`
+
+    **Error Codes**
+    - `404`: Certificate record not found or file missing.
+    - `500`: Internal server error while retrieving certificate.
+
+    **Notes**
+    - This endpoint returns a `FileResponse` (image), not JSON.
+    """
     try:
         cert_info = certificates.get(unique_id)
         if not cert_info:
