@@ -42,6 +42,7 @@ async def create_certificate(cert: CertificateCreate):
                 cert_obj.participant_name,
                 cert_obj.event_name,
                 cert_obj.date_issued,
+                cert_obj.certificate_type,
                 output_path
             )
         except FileNotFoundError as e:
@@ -106,6 +107,7 @@ async def create_comp_certificate(cert: CertificateCreate):
                 cert_obj.participant_name,
                 cert_obj.event_name,
                 cert_obj.date_issued,
+                cert_obj.certificate_type,
                 output_path
             )
         except FileNotFoundError as e:
