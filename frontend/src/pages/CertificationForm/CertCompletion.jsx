@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './CertificateForm.css';
+import './CertCompletion.css';
 import { toast } from 'react-hot-toast';
 
-const CertificateForm = () => {
+const CertCompletion = () => {
   const [form, setForm] = useState({
     participant_name: '',
     event_name: '',
@@ -138,4 +138,4 @@ const CertificateForm = () => {
   );
 };
 
-export default CertificateForm;
+export default CertCompletion;
